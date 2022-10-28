@@ -45,10 +45,10 @@ def solver(exclude: str = "", include: str = "", pattern: str = ".....") -> list
                 result.append(word)
     return result
 
-
+exclude_ = input("Ввод отсутствуюших букв:")
+include_ = input("Ввод присутствующих букв:")
+pattern_ = input("Ввод паттерна:")
 if __name__ == '__main__':
-    # INPUT YOUR HINTS AS ARGUMENTS BELOW
-    candidates = solver(exclude="автксбз", include="оме", pattern="м....")
-
+    candidates = solver(exclude=exclude_, include=include_, pattern=pattern_)
     print(len(candidates))
     print(*candidates, sep=" ")
