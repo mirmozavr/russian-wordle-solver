@@ -37,16 +37,17 @@ Most of the time first two will do the job.
 
 ### HOWTO
 1. Start your game with any word or use my tactic (КРОАТ -> СЕЛИН). Use words one by one or both right away.
-2. Input received hints to `solver` function. First chars that ARE NOT in target word (as a string), 
+2. Input received hints into an input window. Use space as a separator. 
+First chars that ARE NOT in target word (as a string), 
 then chars that ARE in target word (as a string). If correct position for char is found, add it as
-a third argument.
+a third argument. If you don't have excluded or included chars just use a dot symbol. But don't replace the pattern.
 3. Choose the best candidate from the received output and use it in your game. Repeat from step 2 
 until endgame. Good luck!  
 
 ### Example:
 Hints: `а, в, т, к, с, б, з` are not in the target word, `о, м, е` are 
 in target word and `м` is found to be the 1st letter. Function will look like this:  
->`solver(exclude="автксбз", include="оме", pattern="м....")`   
+>`автксбз оме м....`   
 
 And the results will be:
 
