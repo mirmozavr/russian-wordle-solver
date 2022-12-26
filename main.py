@@ -2,7 +2,7 @@ import re
 from collections import Counter
 from sys import stderr
 from time import sleep
-
+import argparse
 
 def filter_5letter_words():
     """
@@ -47,33 +47,18 @@ def solver(exclude: str = "", include: str = "", pattern: str = ".....") -> list
                 result.append(word)
     return result
 
-
 def main():
-    exclude = include = ""
-    pattern = "....."
-    while True:
-        usr_input = input("Type excluded chars [optional], included chars [optional]"
-                          " and pattern [optional].\nUse space as a separator. Use any "
-                          "punctuation symbol to skip excluded or included chars.\nLast input was:\n"
-                          f"{exclude} {include} {pattern}\n")
-        args = usr_input.split()
-        if len(args) == 1:
-            exclude = args[0]
-        elif len(args) == 2:
-            exclude, include = args
-        elif len(args) == 3:
-            exclude, include, pattern = args
-        else:
-            print("Bad input", file=stderr)
-            continue
-
-        candidates = solver(exclude=exclude, include=include, pattern=pattern)
-
-        print(f"Found {len(candidates)} candidates")
-        print(*candidates, sep=" ")
-        sleep(0.3)
-        print()
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument("exclude", help="Chars that are not in the target word")
+    parser.add_argument("include", help="Chars that are in the target word")
+    parser.add_argument("pattern", help="Pattern for chars in correct position", default=".....")
+    args = parser.parse_args()
+    exclude = args.exclude
+    include = args.include
+    pattern = args.pattern
+    candidates = solver(exclude=exclude, include=include, pattern=pattern)
+    print(f"Found {len(candidates)} candidates")
+    print(*candidates, sep=" ")
 
 if __name__ == '__main__':
     main()
